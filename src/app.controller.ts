@@ -1,23 +1,26 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Post, Body, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
-  @Get()
+  @Get('/')
   @Render('index')
-  root(){
+  root() {
     return {
-      title: 'タイトルです',
-      header: 'ヘッダーです',
-      message: 'メッセージです'
+      title: '.',
+      header: '.',
+      message: '登録してください'
     }
   }
-
-//   getHello(): string {
-//     return this.appService.getHello();
-//   }
-// }
+  @Post('/')
+  @Render('index')
+  send(@Body() form: any) {
+    return {
+      title: 'フォームで入力された内容:',
+      message: JSON.stringify(form)
+    }
+  }
 }
 
