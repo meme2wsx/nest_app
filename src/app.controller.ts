@@ -14,13 +14,9 @@ export class AppController {
       message: '登録してください'
     }
   }
+
   @Post('/')
-  @Render('index')
   send(@Body() form: any) {
-    return {
-      title: 'フォームで入力された内容:',
-      message: JSON.stringify(form)
-    }
+    return form
   }
 }
-
